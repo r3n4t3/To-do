@@ -9,9 +9,9 @@ Python 3.5
 - Get all Task
 - Get today's Task
 - Delete task
+- Update task
 
 ## What's pending
- - Update task
  - Clear taks
 
 ## Deployment
