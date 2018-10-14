@@ -56,7 +56,7 @@ def print_menu():
     print("6. Exit")
 
 def print_status():
-    print("Selection a status for your new task :")
+    print("Select a status for your new task :")
     print("1. COMPLETED")
     print("2. PENDING")
     print("3. CANCELED")
@@ -74,6 +74,33 @@ def analyze_status():
         print("Invalid option, try again.!\n\n")
         return Status.PENDING
 
+def update_menu():
+    print("Select the property o the task you intend to update:")
+    print("1. Title")
+    print("2. Status")
+    print("3. Time")
+    return input(" : ")
+
+def update_task(to_do):
+    option = update_menu()
+    if option == '1':
+        task_title = input("Enter the title of the task : ")
+        to_do.get_title(task_title)
+        return to_do
+    elif option == '2':
+        task_status = analyze_status()
+        to_do.set_status(task_status)
+        return to_do
+    elif option == '3':
+        date_entry = input("Enter a date in YYYY-MM-DD format : ")
+        year, month, day = map(int, date_entry.split('-'))
+        task_date = assemble_date(year, month, day)
+        to_do.set_date(task_date)
+        return to_do
+    else:
+        print("Invalid option, try again.!\n\n")
+        return to_do
+
 def analyze_option(option):
     print("\n")
     if option == '1':
@@ -87,7 +114,13 @@ def analyze_option(option):
         print("Added task.")
         print()
     elif option == '2':
-        print("Updated task.")
+        id = input("Enter task id : ")
+        for index, to_do in enumerate(to_do_list):
+            if str( to_do.get_id() ) == id:
+                print(to_do)
+                to_do_list[index] = update_task(to_do)
+                print("Updated task.")
+                exit
     elif option == '3':
         print("All Tasks : ")
         for to_do in to_do_list:
